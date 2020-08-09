@@ -1,0 +1,80 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+    </style>
+
+    <!-- Dark theme. -->
+    <style name="DarkAppTheme" parent="ThemeOverlay.MaterialComponents.Dark">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+    </style>
+
+    <!-- Splash screen theme. -->
+    <style name="splashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bgnd</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
+    <!-- Styles for texts -->
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="TextAppearance.TitleWhite" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.Subtitle" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.TextContent" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="TextAppearance.TextGrayVariant" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGrayVariant</item>
+    </style>
+
+    <style name="TextAppearance.TextGreen" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="TextAppearance.TextWhite" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.SmallText" parent="TextAppearance.Title">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.BlackSmallText" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

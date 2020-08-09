@@ -1,0 +1,58 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="categoryModel"
+            type="com.dtechatoms.cheffcipe.domain.CategoryModel" />
+
+        <variable
+            name="clickListener"
+            type="com.dtechatoms.cheffcipe.adapters.CategoryRecyclerViewAdapter.CategoryClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_12dp"
+        android:onClick="@{() -> clickListener.onClick(categoryModel)">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardView3"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:cardCornerRadius="@dimen/margin_8dp"
+            android:background="@color/colorGray20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/category_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{categoryModel.strCategoryImg}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/category_name"
+            style="@style/TextAppearance.BlackSmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:text="@{categoryModel.strCategory}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

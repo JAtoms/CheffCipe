@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rectangle_radius_10d">10dp</dimen>
+    <dimen name="rectangle_radius_15d">15dp</dimen>
+    <dimen name="card_view_radius_16dp">16dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_22dp">22dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_68dp">68dp</dimen>
+    <dimen name="margin_37dp">37dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_45dp">45dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="margin_200dp">200dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

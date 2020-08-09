@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.dtechatoms.cheffcipe.ui.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment2_to_categoriesFragment2"
+            app:destination="@id/categoriesFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_foodDetailFragment2"
+            app:destination="@id/foodDetailFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoriesFragment2"
+        android:name="com.dtechatoms.cheffcipe.ui.CategoriesFragment"
+        android:label="categories_fragment"
+        tools:layout="@layout/categories_fragment" >
+        <action
+            android:id="@+id/action_categoriesFragment2_to_foodDetailFragment2"
+            app:destination="@id/foodDetailFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodDetailFragment2"
+        android:name="com.dtechatoms.cheffcipe.ui.FoodDetailFragment"
+        android:label="food_detail_fragment"
+        tools:layout="@layout/food_detail_fragment" >
+        <action
+            android:id="@+id/action_foodDetailFragment2_to_favouriteFragment2"
+            app:destination="@id/favouriteFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouriteFragment2"
+        android:name="com.dtechatoms.cheffcipe.ui.FavouriteFragment"
+        android:label="favourite_fragment"
+        tools:layout="@layout/favourite_fragment" />
+
+</navigation>
