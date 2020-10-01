@@ -20,7 +20,6 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:theme=""
             tools:layout_editor_absoluteX="67dp"
             tools:layout_editor_absoluteY="63dp" />
 

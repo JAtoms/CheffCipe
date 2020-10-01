@@ -13,7 +13,7 @@ interface MealService {
     fun getAllCategories(): Deferred<AllCategories>
 
     @GET("search.php")
-    fun searchByName(@Query("s") s : String): Deferred<List<FoodsByName>>
+    fun searchByName(@Query("s") s : String): Deferred<FoodsByName>
 
     @GET("filter.php")
     fun searchByCategory(@Query("c") c : String): Deferred<FoodsByCategory>

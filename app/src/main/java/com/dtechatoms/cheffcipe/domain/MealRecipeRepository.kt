@@ -54,16 +54,20 @@ class MealRecipeRepository(private val database: MealDataBase) {
         }
     }
 
-//    suspend fun fetchSpecifiedFood(name: String) {
-//
-//        withContext(Dispatchers.IO){
-//            try {
-//                val foodsByName = Network.mealService.searchByName(name).await()
-//                database.recipeDao.insertIntoAllRecipes(*foodsByName.asDatabaseModel())
-//
-//            } catch (e: Exception) {
-//                Timber.e(e)
-//            }
-//        }
-//    }
+    suspend fun fetchSpecifiedFood(name: String): Boolean {
+
+        var boolean = false
+
+         withContext(Dispatchers.IO){
+             boolean = try {
+                 val foodsByName = Network.mealService.searchByName(name).await()
+                 database.recipeDao.insertIntoAllRecipes(*foodsByName.asDatabaseModel())
+                 true
+             } catch (e: Exception) {
+                 Timber.e(e)
+                 false
+             }
+        }
+        return boolean
+    }
 }

@@ -1,18 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorSecondary">@color/secondaryColor</item>
-    </style>
-
-    <!-- Dark theme. -->
-    <style name="DarkAppTheme" parent="ThemeOverlay.MaterialComponents.Dark">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryDark">@color/secondaryColor</item>
         <item name="colorSecondary">@color/secondaryColor</item>
     </style>
 
@@ -32,6 +24,11 @@
     <style name="TextAppearance.TitleWhite" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.SubtitleRed" parent="TextAppearance.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorRed</item>
     </style>
 
     <style name="TextAppearance.Subtitle" parent="TextAppearance.Title">

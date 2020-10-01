@@ -25,6 +25,7 @@ interface RecipeDao{
     fun getListOfSpecificCategories(): LiveData<List<AllSpecificCategoriesEntity>>
 
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIntoAllRecipes(vararg allRecipesEntity: AllRecipesEntity)
 

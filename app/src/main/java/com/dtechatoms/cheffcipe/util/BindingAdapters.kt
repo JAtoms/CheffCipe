@@ -14,9 +14,15 @@ import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
  */
 
 @BindingAdapter("homeCategoriesListData")
-fun bindRecyClerView(recyclerView: RecyclerView, categoryClass: List<CategoryModel>?) {
+fun categoryBindRecyclerView(recyclerView: RecyclerView, categoryClass: List<CategoryModel>?) {
     val adapter = recyclerView.adapter as CategoryRecyclerViewAdapter
     adapter.submitList(categoryClass)
+}
+
+@BindingAdapter("homeAllMealsListData")
+fun allFoodsBindRecyclerView(recyclerView: RecyclerView, foodsByNameModel: List<FoodsByNameModel>?) {
+    val adapter = recyclerView.adapter as HomeAllMealRecyclerViewAdapter
+    adapter.submitList(foodsByNameModel)
 }
 
 /**

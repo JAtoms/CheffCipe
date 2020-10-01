@@ -5,12 +5,11 @@
     <string name="food_image">Food image</string>
     <string name="food_title">Andy &amp; Cindy\'s Dinner</string>
     <string name="country_name">Biafra</string>
-    <string name="all_categories">All categories</string>
+    <string name="all_categories">Categories</string>
     <string name="quick_recipe">Quick Recipe</string>
     <string name="category_txt">Miscellaneous</string>
     <string name="waffle_berries_closeup">Waffle Berries Closeup</string>
-    <string name="recipe_by">Recipe by:</string>
-    <string name="person_name">Collins Damawa</string>
+    <string name="nationality">Nationality:</string>
     <string name="short_description">1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water 1/2 cup water</string>
     <string name="ingredients">Ingredients</string>
     <string name="directions">Directions</string>
@@ -110,4 +109,9 @@
     <string name="search_bar">Search bar</string>
     <string name="empty_search_fields">Search fields cannot be empty</string>
     <string name="favourites">Favourites</string>
+    <string name="today_s_menu">Today\'s menu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_all_food_categories">List all food categories</string>
+    <string name="move_back_to_home_fragment">Move back to home fragment</string>
 </resources>

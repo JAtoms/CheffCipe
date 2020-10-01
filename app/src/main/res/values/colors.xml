@@ -13,8 +13,11 @@
     <color name="colorBlackScrim">#191919</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGray">#555</color>
+    <color name="tabColor">#979797</color>
+    <color name="colorRed">#E41202</color>
     <color name="colorGrayDada">#DADADA</color>
     <color name="colorGrayVariant">#B4C2D3</color>
     <color name="colorGray20">#33B4C2D3</color>
+    <color name="shimmerBackground">#dddddd</color>
 </resources>
 

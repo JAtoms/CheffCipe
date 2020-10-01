@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.2"
 
     dataBinding {
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.dtechatoms.cheffcipe"
         minSdkVersion 22
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +27,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    androidExtensions{
+        experimental = true
     }
 
 }
@@ -43,9 +47,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
 
-    // Material design
-    implementation 'com.google.android.material:material:$material_version'
+
 
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
@@ -79,5 +83,8 @@ dependencies {
 
     // WorkManager
     implementation "android.arch.work:work-runtime-ktx:$version_work"
+
+    // Shimmer for loading texts and images
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 }

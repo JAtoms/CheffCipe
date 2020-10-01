@@ -12,10 +12,15 @@
         tools:layout="@layout/home_fragment" >
         <action
             android:id="@+id/action_homeFragment2_to_categoriesFragment2"
-            app:destination="@id/categoriesFragment2" />
+            app:destination="@id/categoriesFragment2"
+            app:popUpTo="@id/homeFragment2"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment2_to_foodDetailFragment2"
             app:destination="@id/foodDetailFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_favouriteFragment2"
+            app:destination="@id/favouriteFragment2" />
     </fragment>
 
     <fragment
@@ -26,6 +31,12 @@
         <action
             android:id="@+id/action_categoriesFragment2_to_foodDetailFragment2"
             app:destination="@id/foodDetailFragment2" />
+        <argument
+            android:name="foodCategory"
+            app:argType="com.dtechatoms.cheffcipe.domain.CategoryModel" />
+        <action
+            android:id="@+id/action_categoriesFragment2_to_homeFragment22"
+            app:destination="@id/homeFragment2" />
     </fragment>
 
     <fragment
@@ -33,9 +44,9 @@
         android:name="com.dtechatoms.cheffcipe.ui.FoodDetailFragment"
         android:label="food_detail_fragment"
         tools:layout="@layout/food_detail_fragment" >
-        <action
-            android:id="@+id/action_foodDetailFragment2_to_favouriteFragment2"
-            app:destination="@id/favouriteFragment2" />
+        <argument
+            android:name="selectedFood"
+            app:argType="com.dtechatoms.cheffcipe.domain.FoodsByNameModel" />
     </fragment>
 
     <fragment

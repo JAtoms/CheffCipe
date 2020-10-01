@@ -1,11 +1,16 @@
 package com.dtechatoms.cheffcipe.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
 data class CategoryModel(
     val idCategory: String,
     val strCategory: String,
     val strCategoryImg: String,
     val strCategoryDescription: String
-)
+): Parcelable
 
 data class FoodsByCategoryModel(
     val foodName: String,
@@ -13,6 +18,7 @@ data class FoodsByCategoryModel(
     val idMeal: String
 )
 
+@Parcelize
 data class FoodsByNameModel(
     val idMeal: String,
     val foodName: String,
@@ -62,7 +68,7 @@ data class FoodsByNameModel(
     val strMeasure18: String?,
     val strMeasure19: String?,
     val strMeasure20: String?
-)
+) : Parcelable
 
 {
 

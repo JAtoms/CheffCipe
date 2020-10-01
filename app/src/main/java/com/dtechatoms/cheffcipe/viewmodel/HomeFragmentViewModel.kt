@@ -5,14 +5,11 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dtechatoms.cheffcipe.R
 import com.dtechatoms.cheffcipe.database.MealDataBase
+import com.dtechatoms.cheffcipe.domain.CategoryModel
 import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
 import com.dtechatoms.cheffcipe.domain.MealRecipeRepository
-import com.dtechatoms.cheffcipe.network.*
 import kotlinx.coroutines.*
-import timber.log.Timber
-import java.lang.Exception
 
 class HomeFragmentViewModel(val context: Context, application: Application) :
     AndroidViewModel(application) {
@@ -22,28 +19,42 @@ class HomeFragmentViewModel(val context: Context, application: Application) :
 
     private val database = MealDataBase.getInstance(application)
     private val mealRecipeRepository = MealRecipeRepository(database)
+    private val allDataBaseMeals = mealRecipeRepository.allFoods
 
+    // Navigate to selected food
+    private val _navigateToSelectedFood = MutableLiveData<FoodsByNameModel>()
+    val navigateToSelectedFood : LiveData<FoodsByNameModel>
+        get() = _navigateToSelectedFood
+
+    // Navigate to selected category
+    private val _navigateToSelectedCategory = MutableLiveData<CategoryModel>()
+    val navigateToSelectedCategory : LiveData<CategoryModel>
+        get() = _navigateToSelectedCategory
+
+    // List categories of meals
     val categoryList = mealRecipeRepository.listCategory
-    val allDataBaseMeals = mealRecipeRepository.allFoods
 
-    private val _homeRecipes = allDataBaseMeals
+    // List different meals on the home fragment
     val homeRecipes: LiveData<List<FoodsByNameModel>>
-        get() = _homeRecipes
+        get() = allDataBaseMeals
 
-    private val _searchResultMeals = MutableLiveData<List<FoodsByName>>()
-    val searchResultMeals: LiveData<List<FoodsByName>>
-        get() = _searchResultMeals
+    private val _shimmerCategory = MutableLiveData<Boolean>()
+    val shimmerCategory : LiveData<Boolean>
+    get() = _shimmerCategory
 
-    private val _searchError = MutableLiveData<String>()
-    val searchError: LiveData<String>
-        get() = _searchError
 
-    private val _searchClicked = MutableLiveData<String>()
-    val searchClicked: LiveData<String>
-        get() = _searchClicked
 
-    private var searchMade = false
-    var searchValue: String? = null
+    init {
+        uiScope.launch {
+            mealRecipeRepository.fetchSpecifiedFood("cake")
+            mealRecipeRepository.fetchSpecifiedFood("soup")
+            mealRecipeRepository.fetchSpecifiedFood("salmon")
+            mealRecipeRepository.fetchSpecifiedFood("avocado")
+            mealRecipeRepository.fetchSpecifiedFood("egg")
+            mealRecipeRepository.fetchSpecifiedFood("apple")
+            mealRecipeRepository.fetchSpecifiedFood("arrabiata")
+        }
+    }
 
 
     fun searchMeal() {
@@ -51,31 +62,27 @@ class HomeFragmentViewModel(val context: Context, application: Application) :
         // TODO if no network, update searchError
 
         uiScope.launch {
-            var errorGetter = "Just Error"
-            if (searchValue.isNullOrBlank()) {
-                _searchError.value = context.getString(R.string.empty_search_fields)
-            } else {
-                withContext(Dispatchers.IO) {
-                    try {
-                        val foodsByName = Network.mealService.searchByName("apple").await()
-                      //  _searchResultMeals.value = foodsByName
-                        // TODO Update search result to data base
-                        searchMade = true
+            _shimmerCategory.value = mealRecipeRepository.fetchSpecifiedFood("egg")
+        }
 
-                    } catch (e: Exception) {
-                        Timber.e(e)
-                        errorGetter = e.toString()
-                    }
-                }
-            }
-            _searchError.value = errorGetter
-        }
-        if (searchMade) {
-            searchResultMeals
-            _searchClicked.value = "Done"
-        }
+
     }
 
+    fun navigateToPropertiesDetail(foodsByNameModel: FoodsByNameModel){
+        _navigateToSelectedFood.value = foodsByNameModel
+    }
+
+    fun displayPropertiesDetailCompleted(){
+        _navigateToSelectedFood.value = null
+    }
+
+    fun navigateToCategories(categoryModel: CategoryModel){
+       _navigateToSelectedCategory.value = categoryModel
+    }
+
+    fun navigateToCategoriesCompleted(){
+        _navigateToSelectedCategory.value = null
+    }
 
     /**
      * Cancel all coroutines when the ViewModel is cleared

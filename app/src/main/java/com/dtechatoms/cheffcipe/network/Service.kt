@@ -7,10 +7,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-// Since we only have one service, this can all go in one file.
-// If you add more services, split this to multiple files and make sure to share the retrofit
-// object between services.
-
 private const val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
 
 /**
