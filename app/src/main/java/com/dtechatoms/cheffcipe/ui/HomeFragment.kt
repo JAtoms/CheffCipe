@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.dtechatoms.cheffcipe.adapters.CategoryRecyclerViewAdapter
-import com.dtechatoms.cheffcipe.adapters.HomeAllMealRecyclerViewAdapter
+import com.dtechatoms.cheffcipe.adapters.ListOfCategoryRecyclerViewAdapter
+import com.dtechatoms.cheffcipe.adapters.ListOfMealsRecyclerViewAdapter
 import com.dtechatoms.cheffcipe.databinding.HomeFragmentBinding
 import com.dtechatoms.cheffcipe.viewmodel.HomeFragmentViewModel
 import com.dtechatoms.cheffcipe.viewmodel.HomeFragmentViewModelFactory
@@ -43,15 +43,15 @@ class HomeFragment : Fragment() {
 
         // Click listener for recyclerViewQuickRecipe
         val quickAdapter =
-            HomeAllMealRecyclerViewAdapter(
-                HomeAllMealRecyclerViewAdapter.AllMealsClickListener {
+            ListOfMealsRecyclerViewAdapter(
+                ListOfMealsRecyclerViewAdapter.AllMealsClickListener {
                     viewModel.navigateToPropertiesDetail(it)
                 })
 
         // Click listener for recyclerViewCategories
         val adapter =
-            CategoryRecyclerViewAdapter(
-                CategoryRecyclerViewAdapter.CategoryClickListener {
+            ListOfCategoryRecyclerViewAdapter(
+                ListOfCategoryRecyclerViewAdapter.CategoryClickListener {
                     viewModel.navigateToCategories(it)
                     Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
                 })
@@ -71,8 +71,6 @@ class HomeFragment : Fragment() {
                 viewModel.navigateToCategoriesCompleted()
             }
         })
-
-
 
         homeFragmentBinding.recyclerViewQuickRecipe.adapter = quickAdapter
         homeFragmentBinding.recyclerViewCategories.adapter = adapter

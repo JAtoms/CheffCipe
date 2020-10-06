@@ -3,7 +3,6 @@ package com.dtechatoms.cheffcipe.domain
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-
 @Parcelize
 data class CategoryModel(
     val idCategory: String,

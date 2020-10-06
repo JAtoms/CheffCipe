@@ -13,8 +13,7 @@
         <action
             android:id="@+id/action_homeFragment2_to_categoriesFragment2"
             app:destination="@id/categoriesFragment2"
-            app:popUpTo="@id/homeFragment2"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_homeFragment2_to_foodDetailFragment2"
             app:destination="@id/foodDetailFragment2" />
@@ -30,13 +29,11 @@
         tools:layout="@layout/categories_fragment" >
         <action
             android:id="@+id/action_categoriesFragment2_to_foodDetailFragment2"
-            app:destination="@id/foodDetailFragment2" />
+            app:destination="@id/foodDetailFragment2"
+            app:popUpToInclusive="false" />
         <argument
-            android:name="foodCategory"
+            android:name="foodCategoryList"
             app:argType="com.dtechatoms.cheffcipe.domain.CategoryModel" />
-        <action
-            android:id="@+id/action_categoriesFragment2_to_homeFragment22"
-            app:destination="@id/homeFragment2" />
     </fragment>
 
     <fragment

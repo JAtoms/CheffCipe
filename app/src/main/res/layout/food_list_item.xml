@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.dtechatoms.cheffcipe.adapters.HomeAllMealRecyclerViewAdapter.AllMealsClickListener" />
+            type="com.dtechatoms.cheffcipe.adapters.ListOfMealsRecyclerViewAdapter.AllMealsClickListener" />
 
     </data>
 

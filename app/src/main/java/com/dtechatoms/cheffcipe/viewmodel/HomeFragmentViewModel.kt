@@ -19,7 +19,6 @@ class HomeFragmentViewModel(val context: Context, application: Application) :
 
     private val database = MealDataBase.getInstance(application)
     private val mealRecipeRepository = MealRecipeRepository(database)
-    private val allDataBaseMeals = mealRecipeRepository.allFoods
 
     // Navigate to selected food
     private val _navigateToSelectedFood = MutableLiveData<FoodsByNameModel>()
@@ -32,16 +31,18 @@ class HomeFragmentViewModel(val context: Context, application: Application) :
         get() = _navigateToSelectedCategory
 
     // List categories of meals
-    val categoryList = mealRecipeRepository.listCategory
+    private val _categoryList = mealRecipeRepository.listCategory
+    val categoryList : LiveData<List<CategoryModel>>
+    get() = _categoryList
 
     // List different meals on the home fragment
+    private val _allDataBaseMeals = mealRecipeRepository.allFoods
     val homeRecipes: LiveData<List<FoodsByNameModel>>
-        get() = allDataBaseMeals
+        get() = _allDataBaseMeals
 
     private val _shimmerCategory = MutableLiveData<Boolean>()
     val shimmerCategory : LiveData<Boolean>
     get() = _shimmerCategory
-
 
 
     init {

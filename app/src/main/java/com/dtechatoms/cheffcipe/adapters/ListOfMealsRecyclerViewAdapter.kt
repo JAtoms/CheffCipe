@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dtechatoms.cheffcipe.databinding.FoodListItemBinding
 import com.dtechatoms.cheffcipe.databinding.HomeCategoriesItemBinding
-import com.dtechatoms.cheffcipe.domain.CategoryModel
 import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
 
 /**
  * Created by Joshua Nwokoye (Atoms) on 7/22/2020.
  */
-class HomeAllMealRecyclerViewAdapter(val clickListener: AllMealsClickListener) :
-    ListAdapter<FoodsByNameModel, HomeAllMealRecyclerViewAdapter.AllMealViewHolder>(
+class ListOfMealsRecyclerViewAdapter(val clickListener: AllMealsClickListener) :
+    ListAdapter<FoodsByNameModel, ListOfMealsRecyclerViewAdapter.AllMealViewHolder>(
         DiffCallBack
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllMealViewHolder {
