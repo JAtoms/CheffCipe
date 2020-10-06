@@ -1,48 +1,86 @@
 package com.dtechatoms.cheffcipe.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-
+import com.bumptech.glide.Glide
 import com.dtechatoms.cheffcipe.R
+import com.dtechatoms.cheffcipe.adapters.ListOfCategoryRecyclerViewAdapter
+import com.dtechatoms.cheffcipe.adapters.ListOfMealsRecyclerViewAdapter
+import com.dtechatoms.cheffcipe.databinding.CategoriesBottomSheetBinding
 import com.dtechatoms.cheffcipe.databinding.CategoriesFragmentBinding
+import com.dtechatoms.cheffcipe.domain.CategoryModel
 import com.dtechatoms.cheffcipe.viewmodel.CategoriesFragmentViewModel
+import com.dtechatoms.cheffcipe.viewmodel.CategoryFragmentViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.categories_bottom_sheet.*
 
 class CategoriesFragment : Fragment() {
 
     private lateinit var categoriesFragmentBinding: CategoriesFragmentBinding
     private lateinit var viewModel: CategoriesFragmentViewModel
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var viewModelFactory: CategoryFragmentViewModelFactory
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var bottomSheetBinding: CategoriesBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        // Get passed argument
+        val argument = CategoriesFragmentArgs.fromBundle(arguments!!).foodCategoryList
+        val activity = requireNotNull(this.activity)
+
+        viewModelFactory = CategoryFragmentViewModelFactory(argument,this.requireContext(), activity.application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesFragmentViewModel::class.java)
+
         categoriesFragmentBinding = CategoriesFragmentBinding.inflate(inflater)
+        bottomSheetBinding = CategoriesBottomSheetBinding.inflate(inflater)
+
+        viewModel.categoriesWithContent.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it[0].foodName, Toast.LENGTH_SHORT).show()
+        })
+
+        bottomSheetBinding.categoryViewModel = viewModel
+
+        categoriesFragmentBinding.toolBar.setNavigationIcon(R.drawable.ic_icon_back_circled)
+
+        viewModel.categoryListDetail.observe(viewLifecycleOwner, Observer {
+            upDateUI(it)
+        })
+
+        val allCategoryMeals =
+            ListOfMealsRecyclerViewAdapter(
+                ListOfMealsRecyclerViewAdapter.AllMealsClickListener {
+                    Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
+                })
+
+
+        val listOfCategories =
+            ListOfCategoryRecyclerViewAdapter(
+                ListOfCategoryRecyclerViewAdapter.CategoryClickListener {
+                    Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
+                })
+
+        categoriesFragmentBinding.allCategoryList.adapter = allCategoryMeals
+        bottomSheetBinding.allCategoriesRecyclerView.adapter = listOfCategories
+
+        categoriesFragmentBinding.lifecycleOwner = this
         return categoriesFragmentBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CategoriesFragmentViewModel::class.java)
 
-        categoriesFragmentBinding.backIcon.setOnClickListener {
-            //findNavController().navigate(CategoriesFragmentDirections.actionCategoriesFragment2ToHomeFragment22())
-           // requireActivity().onBackPressedDispatcher.addCallback(ond)
-        }
-
-        bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         categoriesFragmentBinding.categoryChooser.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -55,6 +93,16 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    fun upDateUI(categoryModel: CategoryModel){
+        categoriesFragmentBinding.categoryName.text = categoryModel.strCategory
+
+        Glide.with(this)
+            .load(categoryModel.strCategoryImg)
+            .into(categoriesFragmentBinding.foodImage)
+
+
     }
 
 }

@@ -11,8 +11,8 @@ import com.dtechatoms.cheffcipe.domain.CategoryModel
 /**
  * Created by Joshua Nwokoye (Atoms) on 7/22/2020.
  */
-class CategoryRecyclerViewAdapter(val clickListener: CategoryClickListener) :
-    ListAdapter<CategoryModel, CategoryRecyclerViewAdapter.CategoryViewHolder>(
+class ListOfCategoryRecyclerViewAdapter(val clickListener: CategoryClickListener) :
+    ListAdapter<CategoryModel, ListOfCategoryRecyclerViewAdapter.CategoryViewHolder>(
         DiffCallBack
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {

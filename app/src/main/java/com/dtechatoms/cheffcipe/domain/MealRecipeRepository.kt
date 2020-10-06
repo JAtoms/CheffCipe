@@ -1,5 +1,6 @@
 package com.dtechatoms.cheffcipe.domain
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.room.RoomDatabase
@@ -21,10 +22,13 @@ class MealRecipeRepository(private val database: MealDataBase) {
     /**
      * Perform dataBase calls
      */
+
+    // Gets list of category items
     val listCategory: LiveData<List<CategoryModel>> = Transformations.map(database.recipeDao.getListOfCategories()){
         it.asAllCatDomainModel()
     }
 
+    // Gets all meal in the database
     val allFoods: LiveData<List<FoodsByNameModel>> = Transformations.map(database.recipeDao.getAllRecipes()){
         it.asAllRecipeDomainModel()
     }
@@ -47,8 +51,9 @@ class MealRecipeRepository(private val database: MealDataBase) {
             try {
                 val foodsByCategory = Network.mealService.searchByCategory(category).await()
                 database.recipeDao.insertIntoSpecificCategories(*foodsByCategory.asDataModel())
-
+                Log.e("AtomsLogs", "Beef")
             } catch (e: Exception) {
+                Log.e("AtomsLogs", "No beef $e.toString()")
                 Timber.e(e)
             }
         }

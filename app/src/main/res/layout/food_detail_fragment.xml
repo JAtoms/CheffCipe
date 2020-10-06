@@ -47,32 +47,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/food_image" />
 
-
-        <ImageView
-            android:id="@+id/back_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="18dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="38dp"
-            android:src="@drawable/ic_icon_back_circled"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/food_name"
             style="@style/TextAppearance.TitleWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="18dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{foodDetailViewModel.selectedFood.foodName}"
-            app:layout_constraintBottom_toBottomOf="@+id/back_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/back_icon"
-            app:layout_constraintTop_toTopOf="@+id/back_icon"
-            tools:text="Waffle Berries Closeup" />
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/all_categories"
+            app:layout_collapseMode="parallax"
+            app:layout_constraintEnd_toEndOf="@+id/category_chooser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tool_bar"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

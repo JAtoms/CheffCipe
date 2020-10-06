@@ -1,25 +1,19 @@
 package com.dtechatoms.cheffcipe.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-
 import com.dtechatoms.cheffcipe.R
 import com.dtechatoms.cheffcipe.databinding.FoodDetailFragmentBinding
 import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
 import com.dtechatoms.cheffcipe.viewmodel.FoodDetailFragmentViewModel
 import com.dtechatoms.cheffcipe.viewmodel.FoodDetailFragmentViewModelFactory
-import com.dtechatoms.cheffcipe.viewmodel.HomeFragmentViewModel
-import com.dtechatoms.cheffcipe.viewmodel.HomeFragmentViewModelFactory
-import kotlinx.android.synthetic.main.home_fragment.*
 
 class FoodDetailFragment : Fragment() {
 
@@ -35,6 +29,7 @@ class FoodDetailFragment : Fragment() {
 
         // Get passed argument
         val argument = FoodDetailFragmentArgs.fromBundle(arguments!!).selectedFood
+        foodDetailFragmentBinding.toolBar.setNavigationIcon(R.drawable.ic_icon_back_circled)
 
         val activity = requireNotNull(this.activity)
         foodDetailViewModelFactory =

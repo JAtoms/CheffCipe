@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.dtechatoms.cheffcipe.adapters.CategoryRecyclerViewAdapter.CategoryClickListener" />
+            type="com.dtechatoms.cheffcipe.adapters.ListOfCategoryRecyclerViewAdapter.CategoryClickListener" />
 
     </data>
 
