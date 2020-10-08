@@ -99,6 +99,21 @@
                         app:layout_constraintTop_toTopOf="@+id/tool_bar"
                         app:layout_scrollFlags="scroll|enterAlways" />
 
+                    <TextView
+                        android:id="@+id/food_description"
+                        style="@style/TextAppearance.TextWhite"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="8dp"
+                        android:maxLines="4"
+                        android:ellipsize="end"
+                        app:layout_constraintBottom_toTopOf="@+id/category_chooser"
+                        app:layout_constraintEnd_toEndOf="@+id/category_chooser"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/category_name" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -110,19 +125,28 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/all_category_list"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="12dp"
-                android:clipToPadding="false"
-                app:homeAllMealsListData="@{categoryViewModel.categoriesWithContent}"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                tools:itemCount="16"
-                tools:listitem="@layout/food_list_item"/>
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/all_category_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:clipToPadding="false"
+                    android:verticalScrollbarPosition="right"
+                    app:allCatMealsListData="@{categoryViewModel.specifiedCategory}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:spanCount="2"
+                    tools:itemCount="16"
+                    tools:listitem="@layout/food_list_item" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 

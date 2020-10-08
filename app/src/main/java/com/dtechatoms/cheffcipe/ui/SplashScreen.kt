@@ -25,7 +25,6 @@ class SplashActivity : AppCompatActivity() {
         val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
         uiScope.launch {
-            mealRecipeRepository.fetchSpecifiedCategory("Beef")
             mealRecipeRepository.refreshCategories()
         }
 

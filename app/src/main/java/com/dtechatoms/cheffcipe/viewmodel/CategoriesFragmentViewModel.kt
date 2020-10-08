@@ -6,10 +6,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.dtechatoms.cheffcipe.database.AllRecipesEntity
 import com.dtechatoms.cheffcipe.database.MealDataBase
-import com.dtechatoms.cheffcipe.database.asAllRecipeDomainModel
+import com.dtechatoms.cheffcipe.database.asSpecificCategoryDomainModel
 import com.dtechatoms.cheffcipe.domain.CategoryModel
+import com.dtechatoms.cheffcipe.domain.FoodsByCategoryModel
 import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
 import com.dtechatoms.cheffcipe.domain.MealRecipeRepository
 import kotlinx.coroutines.CoroutineScope
@@ -25,20 +25,17 @@ class CategoriesFragmentViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val database = MealDataBase.getInstance(application)
-    private val mealRecipeRepository = MealRecipeRepository(database)
+    private val mealRecipeRepository = MealRecipeRepository(database, categoryModel.strCategory)
 
+    // Gets group of category items to be listed on the Category fragment
     private val _categoryList = MutableLiveData<CategoryModel>()
     val categoryListDetail: LiveData<CategoryModel>
         get() = _categoryList
 
-    // Gets specified food category in the database
-    private val _categoriesWithContent : LiveData<List<FoodsByNameModel>> = Transformations
-        .map(database.recipeDao.getSpecificCategory(categoryModel.idCategory)){
-        it.asAllRecipeDomainModel()
-    }
-
-    val categoriesWithContent: LiveData<List<FoodsByNameModel>>
-        get() = _categoriesWithContent
+    // Gets all the specified categories
+    private val _specifiedCategory = mealRecipeRepository.categoriesWithContent
+    val specifiedCategory : LiveData<List<FoodsByCategoryModel>>
+    get() = _specifiedCategory
 
     // List categories of meals
     val categoryList = mealRecipeRepository.listCategory
@@ -49,7 +46,7 @@ class CategoriesFragmentViewModel(
         uiScope.launch {
 
             // Gets the specified category from network and stores it in the database
-            mealRecipeRepository.fetchSpecifiedCategory(categoryModel.idCategory)
+            mealRecipeRepository.fetchSpecifiedCategory(categoryModel.strCategory)
         }
 
     }

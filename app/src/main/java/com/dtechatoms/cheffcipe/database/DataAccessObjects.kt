@@ -39,8 +39,8 @@ interface RecipeDao{
     fun getAllRecipes(): LiveData<List<AllRecipesEntity>>
 
     // Gets list of a specific category
-    @Query("SELECT *from allrecipesentity WHERE strCategory= :category ")
-    fun getSpecificCategory(category: String): LiveData<List<AllRecipesEntity>>
+    @Query("SELECT *from allspecificcategoriesentity WHERE mealCategory = :category ")
+    fun getSpecificCategory(category: String): LiveData<List<AllSpecificCategoriesEntity>>
 
 //    @Query("SELECT *from allrecipesentity WHERE idMeal= :mealID ")
 //    fun getSpecificMeal(mealID: String): AllRecipesEntity

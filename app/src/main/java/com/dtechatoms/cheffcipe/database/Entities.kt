@@ -37,8 +37,10 @@ data class AllSpecificCategoriesEntity constructor(
     @PrimaryKey
     val idMeal: String,
     val foodName: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val mealCategory: String
 )
+
 
 
 // << Convert Network results to database objects >>
@@ -47,7 +49,8 @@ fun List<AllSpecificCategoriesEntity>.asSpecificCategoryDomainModel(): List<Food
         FoodsByCategoryModel(
             idMeal = it.idMeal,
             foodName = it.foodName,
-            imageUrl = it.imageUrl
+            imageUrl = it.imageUrl,
+            mealCategory = it.mealCategory
         )
     }
 }

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.dtechatoms.cheffcipe.database.MealDataBase
 import com.dtechatoms.cheffcipe.database.asAllCatDomainModel
 import com.dtechatoms.cheffcipe.database.asAllRecipeDomainModel
+import com.dtechatoms.cheffcipe.database.asSpecificCategoryDomainModel
 import com.dtechatoms.cheffcipe.network.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,7 +18,7 @@ import java.lang.Exception
  * Created by Joshua Nwokoye (Atoms) on 7/27/2020.
  */
 
-class MealRecipeRepository(private val database: MealDataBase) {
+class MealRecipeRepository(private val database: MealDataBase, var category: String = "ca") {
 
     /**
      * Perform dataBase calls
@@ -32,6 +33,12 @@ class MealRecipeRepository(private val database: MealDataBase) {
     val allFoods: LiveData<List<FoodsByNameModel>> = Transformations.map(database.recipeDao.getAllRecipes()){
         it.asAllRecipeDomainModel()
     }
+
+    // Gets specified food category in the database
+   val categoriesWithContent : LiveData<List<FoodsByCategoryModel>> = Transformations
+        .map(database.recipeDao.getSpecificCategory(category)){
+            it.asSpecificCategoryDomainModel()
+        }
 
     // Perform network calls
     suspend fun refreshCategories() {
@@ -50,8 +57,9 @@ class MealRecipeRepository(private val database: MealDataBase) {
         withContext(Dispatchers.IO){
             try {
                 val foodsByCategory = Network.mealService.searchByCategory(category).await()
-                database.recipeDao.insertIntoSpecificCategories(*foodsByCategory.asDataModel())
-                Log.e("AtomsLogs", "Beef")
+
+                database.recipeDao.insertIntoSpecificCategories(*foodsByCategory.asDataModel(category))
+                Log.e("AtomsLogs", foodsByCategory.toString())
             } catch (e: Exception) {
                 Log.e("AtomsLogs", "No beef $e.toString()")
                 Timber.e(e)
