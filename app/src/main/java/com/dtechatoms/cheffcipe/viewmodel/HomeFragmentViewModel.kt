@@ -5,8 +5,11 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.dtechatoms.cheffcipe.database.MealDataBase
+import com.dtechatoms.cheffcipe.database.asSpecificCategoryDomainModel
 import com.dtechatoms.cheffcipe.domain.CategoryModel
+import com.dtechatoms.cheffcipe.domain.FoodsByCategoryModel
 import com.dtechatoms.cheffcipe.domain.FoodsByNameModel
 import com.dtechatoms.cheffcipe.domain.MealRecipeRepository
 import kotlinx.coroutines.*

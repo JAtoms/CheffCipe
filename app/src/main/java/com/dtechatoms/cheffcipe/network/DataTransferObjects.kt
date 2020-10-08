@@ -1,6 +1,5 @@
 package com.dtechatoms.cheffcipe.network
 
-import androidx.lifecycle.Transformations.map
 import com.dtechatoms.cheffcipe.database.AllCategoriesEntity
 import com.dtechatoms.cheffcipe.database.AllRecipesEntity
 import com.dtechatoms.cheffcipe.database.AllSpecificCategoriesEntity
@@ -58,13 +57,16 @@ data class FoodCategory(
     val idMeal: String
 )
 
+
+
 // << Convert Network results to database objects >>
-fun FoodsByCategory.asDataModel(): Array<AllSpecificCategoriesEntity> {
+fun FoodsByCategory.asDataModel(category:String): Array<AllSpecificCategoriesEntity> {
     return meals.map {
         AllSpecificCategoriesEntity(
             idMeal = it.idMeal,
             foodName = it.foodName,
-            imageUrl = it.imageUrl
+            imageUrl = it.imageUrl,
+            mealCategory = category
         )
     }.toTypedArray()
 }

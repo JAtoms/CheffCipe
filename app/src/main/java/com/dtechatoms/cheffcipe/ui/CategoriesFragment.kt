@@ -12,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dtechatoms.cheffcipe.R
-import com.dtechatoms.cheffcipe.adapters.ListOfCategoryRecyclerViewAdapter
 import com.dtechatoms.cheffcipe.adapters.ListOfMealsRecyclerViewAdapter
+import com.dtechatoms.cheffcipe.adapters.catListOfMealsRecyclerViewAdapter
 import com.dtechatoms.cheffcipe.databinding.CategoriesBottomSheetBinding
 import com.dtechatoms.cheffcipe.databinding.CategoriesFragmentBinding
 import com.dtechatoms.cheffcipe.domain.CategoryModel
@@ -35,44 +35,35 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Get passed argument
+        // Get passed argument from HomeFragment
         val argument = CategoriesFragmentArgs.fromBundle(arguments!!).foodCategoryList
         val activity = requireNotNull(this.activity)
 
-        viewModelFactory = CategoryFragmentViewModelFactory(argument,this.requireContext(), activity.application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesFragmentViewModel::class.java)
+        viewModelFactory =
+            CategoryFragmentViewModelFactory(argument, this.requireContext(), activity.application)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(CategoriesFragmentViewModel::class.java)
 
         categoriesFragmentBinding = CategoriesFragmentBinding.inflate(inflater)
         bottomSheetBinding = CategoriesBottomSheetBinding.inflate(inflater)
 
-        viewModel.categoriesWithContent.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context, it[0].foodName, Toast.LENGTH_SHORT).show()
-        })
-
+        // ViewModels
+        categoriesFragmentBinding.categoryViewModel = viewModel
         bottomSheetBinding.categoryViewModel = viewModel
 
-        categoriesFragmentBinding.toolBar.setNavigationIcon(R.drawable.ic_icon_back_circled)
+       // Bind RecyclerViews
+        val allCategoryListAdapter = catListOfMealsRecyclerViewAdapter(
+            catListOfMealsRecyclerViewAdapter.AllCatMealsClickListener{
+
+            })
+        categoriesFragmentBinding.allCategoryList.adapter = allCategoryListAdapter
+
 
         viewModel.categoryListDetail.observe(viewLifecycleOwner, Observer {
             upDateUI(it)
         })
 
-        val allCategoryMeals =
-            ListOfMealsRecyclerViewAdapter(
-                ListOfMealsRecyclerViewAdapter.AllMealsClickListener {
-                    Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
-                })
-
-
-        val listOfCategories =
-            ListOfCategoryRecyclerViewAdapter(
-                ListOfCategoryRecyclerViewAdapter.CategoryClickListener {
-                    Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
-                })
-
-        categoriesFragmentBinding.allCategoryList.adapter = allCategoryMeals
-        bottomSheetBinding.allCategoriesRecyclerView.adapter = listOfCategories
-
+        categoriesFragmentBinding.toolBar.setNavigationIcon(R.drawable.ic_icon_back_circled)
         categoriesFragmentBinding.lifecycleOwner = this
         return categoriesFragmentBinding.root
     }
@@ -95,14 +86,13 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun upDateUI(categoryModel: CategoryModel){
+    fun upDateUI(categoryModel: CategoryModel) {
         categoriesFragmentBinding.categoryName.text = categoryModel.strCategory
+        categoriesFragmentBinding.foodDescription.text = categoryModel.strCategoryDescription
 
         Glide.with(this)
             .load(categoryModel.strCategoryImg)
             .into(categoriesFragmentBinding.foodImage)
-
-
     }
 
 }

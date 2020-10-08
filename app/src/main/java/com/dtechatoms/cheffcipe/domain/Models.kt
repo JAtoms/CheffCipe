@@ -11,11 +11,13 @@ data class CategoryModel(
     val strCategoryDescription: String
 ): Parcelable
 
+@Parcelize
 data class FoodsByCategoryModel(
     val foodName: String,
     val imageUrl: String,
-    val idMeal: String
-)
+    val idMeal: String,
+    val mealCategory: String
+): Parcelable
 
 @Parcelize
 data class FoodsByNameModel(
