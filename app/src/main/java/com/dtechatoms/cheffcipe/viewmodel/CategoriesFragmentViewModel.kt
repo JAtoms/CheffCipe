@@ -25,29 +25,39 @@ class CategoriesFragmentViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val database = MealDataBase.getInstance(application)
-    private val mealRecipeRepository = MealRecipeRepository(database, categoryModel.strCategory)
+    private var mealRecipeRepository = MealRecipeRepository(database, categoryModel.strCategory)
 
     // Gets group of category items to be listed on the Category fragment
     private val _categoryList = MutableLiveData<CategoryModel>()
     val categoryListDetail: LiveData<CategoryModel>
         get() = _categoryList
 
+
     // Gets all the specified categories
-    private val _specifiedCategory = mealRecipeRepository.categoriesWithContent
+    private var _specifiedCategory = mealRecipeRepository.categoriesWithContent
     val specifiedCategory : LiveData<List<FoodsByCategoryModel>>
     get() = _specifiedCategory
 
-    // List categories of meals
-    val categoryList = mealRecipeRepository.listCategory
+    // List categories of meals in bottomSheet
+    private val _bottomSheetCategoryList = mealRecipeRepository.listCategory
+    val categoryList : LiveData<List<CategoryModel>>
+        get() = _bottomSheetCategoryList
 
     init {
         _categoryList.value = categoryModel
-
         uiScope.launch {
-
             // Gets the specified category from network and stores it in the database
             mealRecipeRepository.fetchSpecifiedCategory(categoryModel.strCategory)
         }
+    }
+
+    fun upChangeCategoryList(categoryModel: CategoryModel){
+//        val categoriesWithContent : LiveData<List<FoodsByCategoryModel>> = Transformations
+//            .map(database.recipeDao.getSpecificCategory(categoryModel.strCategory)){
+//                it.asSpecificCategoryDomainModel()
+//            }
+      //c  _specifiedCategory = categoriesWithContent
+        _categoryList.value = categoryModel
 
     }
 

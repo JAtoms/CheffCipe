@@ -52,7 +52,7 @@
             android:layout_marginTop="8dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@{allFoodsModel.foodName}"
+            app:setTexts="@{allFoodsModel.foodName}"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -79,7 +79,7 @@
                 android:layout_marginEnd="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{allFoodsModel.strArea}" />
+                app:setTexts="@{allFoodsModel.strArea}" />
 
         </LinearLayout>
 

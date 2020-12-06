@@ -8,8 +8,7 @@ import com.squareup.moshi.JsonClass
 
 /**
  * DataTransferObjects go in this file. These are responsible for parsing responses from the server
- * or formatting objects to send to the server. You should convert these to domain objects before
- * using them.
+ * or formatting objects to send to the server.
  */
 
 
@@ -102,9 +101,9 @@ data class FoodName(
     val strIngredient8: String?,
     val strIngredient9: String?,
     val strIngredient10: String?,
-    val strIngredient11: String,
-    val strIngredient12: String,
-    val strIngredient13: String,
+    val strIngredient11: String?,
+    val strIngredient12: String?,
+    val strIngredient13: String?,
     val strIngredient14: String?,
     val strIngredient15: String?,
     val strIngredient16: String?,
@@ -122,9 +121,9 @@ data class FoodName(
     val strMeasure8: String?,
     val strMeasure9: String?,
     val strMeasure10: String?,
-    val strMeasure11: String,
-    val strMeasure12: String,
-    val strMeasure13: String,
+    val strMeasure11: String?,
+    val strMeasure12: String?,
+    val strMeasure13: String?,
     val strMeasure14: String?,
     val strMeasure15: String?,
     val strMeasure16: String?,
@@ -145,7 +144,29 @@ fun FoodsByName.asDatabaseModel(): Array<AllRecipesEntity> {
             strInstructions = it.strInstructions,
             youtubeUrl = it.youtubeUrl,
             sourceUrl = it.sourceUrl,
-            strIngredient1 = it.strIngredient1,
+            strIngredient1 =
+            "${it.strIngredient1}      -      ${it.strMeasure1} \n " +
+                    "${it.strIngredient2}      -      ${it.strMeasure2} \n " +
+                    "${it.strIngredient3}      -      ${it.strMeasure3} \n " +
+                    "${it.strIngredient4}      -      ${it.strMeasure4} \n " +
+                    "${it.strIngredient5}      -      ${it.strMeasure5} \n " +
+                    "${it.strIngredient6}      -      ${it.strMeasure6} \n " +
+                    "${it.strIngredient7}      -      ${it.strMeasure7} \n " +
+                    "${it.strIngredient8}      -      ${it.strMeasure8} \n " +
+                    "${it.strIngredient9}      -      ${it.strMeasure9} \n " +
+                    "${it.strIngredient10}      -      ${it.strMeasure10} \n " +
+                    "${it.strIngredient11}      -      ${it.strMeasure11} \n " +
+                    "${it.strIngredient12}      -      ${it.strMeasure12} \n " +
+                    "${it.strIngredient13}      -      ${it.strMeasure13} \n " +
+                    "${it.strIngredient14}      -      ${it.strMeasure14} \n " +
+                    "${it.strIngredient15}      -      ${it.strMeasure15} \n " +
+                    "${it.strIngredient16}      -      ${it.strMeasure16} \n " +
+                    "${it.strIngredient17}      -      ${it.strMeasure17} \n " +
+                    "${it.strIngredient18}      -      ${it.strMeasure18} \n " +
+                    "${it.strIngredient19}      -      ${it.strMeasure19} \n " +
+                    "${it.strIngredient20}      -      ${it.strMeasure20}"
+            ,
+
             strIngredient2 = it.strIngredient2,
             strIngredient3 = it.strIngredient3,
             strIngredient4 = it.strIngredient4,
@@ -165,6 +186,7 @@ fun FoodsByName.asDatabaseModel(): Array<AllRecipesEntity> {
             strIngredient18 = it.strIngredient18,
             strIngredient19 = it.strIngredient19,
             strIngredient20 = it.strIngredient20,
+
             strMeasure1 = it.strMeasure1,
             strMeasure2 = it.strMeasure2,
             strMeasure3 = it.strMeasure3,

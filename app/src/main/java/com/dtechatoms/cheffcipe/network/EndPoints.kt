@@ -18,5 +18,6 @@ interface MealService {
     @GET("filter.php")
     fun searchByCategory(@Query("c") c : String): Deferred<FoodsByCategory>
 
-
+    @GET("lookup.php")
+    fun searchById(@Query("i") i: String): Deferred<FoodsByName>
 }

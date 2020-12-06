@@ -6,7 +6,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -53,13 +52,12 @@ class HomeFragment : Fragment() {
             ListOfCategoryRecyclerViewAdapter(
                 ListOfCategoryRecyclerViewAdapter.CategoryClickListener {
                     viewModel.navigateToCategories(it)
-                    Toast.makeText(context, it.strCategory, Toast.LENGTH_SHORT).show()
                 })
 
         // Navigate to FoodDetails
         viewModel.navigateToSelectedFood.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToFoodDetailFragment2(it))
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToFoodDetailFragment2(it.idMeal))
                 viewModel.displayPropertiesDetailCompleted()
             }
         })

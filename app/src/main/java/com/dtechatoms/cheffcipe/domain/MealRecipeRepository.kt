@@ -25,24 +25,28 @@ class MealRecipeRepository(private val database: MealDataBase, var category: Str
      */
 
     // Gets list of category items
-    val listCategory: LiveData<List<CategoryModel>> = Transformations.map(database.recipeDao.getListOfCategories()){
-        it.asAllCatDomainModel()
-    }
+    val listCategory: LiveData<List<CategoryModel>> =
+        Transformations.map(database.recipeDao.getListOfCategories()) {
+            it.asAllCatDomainModel()
+        }
 
     // Gets all meal in the database
-    val allFoods: LiveData<List<FoodsByNameModel>> = Transformations.map(database.recipeDao.getAllRecipes()){
-        it.asAllRecipeDomainModel()
-    }
+    val allFoods: LiveData<List<FoodsByNameModel>> =
+        Transformations.map(database.recipeDao.getAllRecipes()) {
+            it.asAllRecipeDomainModel()
+        }
 
     // Gets specified food category in the database
-   val categoriesWithContent : LiveData<List<FoodsByCategoryModel>> = Transformations
-        .map(database.recipeDao.getSpecificCategory(category)){
+    val categoriesWithContent: LiveData<List<FoodsByCategoryModel>> = Transformations
+        .map(database.recipeDao.getSpecificCategory(category)) {
             it.asSpecificCategoryDomainModel()
         }
 
-    // Perform network calls
+    /**
+     * Perform network calls
+     */
     suspend fun refreshCategories() {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             try {
                 val listOfMeals = Network.mealService.getAllCategories().await()
                 database.recipeDao.insertIntoCategories(*listOfMeals.asDataModel())
@@ -54,11 +58,15 @@ class MealRecipeRepository(private val database: MealDataBase, var category: Str
     }
 
     suspend fun fetchSpecifiedCategory(category: String) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             try {
                 val foodsByCategory = Network.mealService.searchByCategory(category).await()
 
-                database.recipeDao.insertIntoSpecificCategories(*foodsByCategory.asDataModel(category))
+                database.recipeDao.insertIntoSpecificCategories(
+                    *foodsByCategory.asDataModel(
+                        category
+                    )
+                )
                 Log.e("AtomsLogs", foodsByCategory.toString())
             } catch (e: Exception) {
                 Log.e("AtomsLogs", "No beef $e.toString()")
@@ -71,16 +79,32 @@ class MealRecipeRepository(private val database: MealDataBase, var category: Str
 
         var boolean = false
 
-         withContext(Dispatchers.IO){
-             boolean = try {
-                 val foodsByName = Network.mealService.searchByName(name).await()
-                 database.recipeDao.insertIntoAllRecipes(*foodsByName.asDatabaseModel())
-                 true
-             } catch (e: Exception) {
-                 Timber.e(e)
-                 false
-             }
+        withContext(Dispatchers.IO) {
+            boolean = try {
+                val foodsByName = Network.mealService.searchByName(name).await()
+                database.recipeDao.insertIntoAllRecipes(*foodsByName.asDatabaseModel())
+                true
+            } catch (e: Exception) {
+                Timber.e(e)
+                false
+            }
         }
         return boolean
+    }
+
+    suspend fun fetchFoodByID(foodID: String): Boolean {
+
+        var boolean = false
+        return withContext(Dispatchers.IO) {
+            boolean = try {
+                val foodsByID = Network.mealService.searchById(foodID).await()
+                database.recipeDao.insertIntoAllRecipes(*foodsByID.asDatabaseModel())
+                true
+            } catch (e: Exception) {
+                Timber.e(e)
+                false
+            }
+            boolean
+        }
     }
 }

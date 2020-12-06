@@ -12,13 +12,13 @@ import java.lang.IllegalArgumentException
  */
 
 class FoodDetailFragmentViewModelFactory(
-    private val foodsByNameModel: FoodsByNameModel,
+    private val foodID: String,
     private val application: Application
 ) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FoodDetailFragmentViewModel::class.java)) {
-            return FoodDetailFragmentViewModel(foodsByNameModel, application) as T
+            return FoodDetailFragmentViewModel(foodID, application) as T
         }
         throw IllegalArgumentException("Unable to construct viewModel from FoodDetailFragmentViewModel")
     }

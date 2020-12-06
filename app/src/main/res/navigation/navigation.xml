@@ -43,7 +43,7 @@
         tools:layout="@layout/food_detail_fragment" >
         <argument
             android:name="selectedFood"
-            app:argType="com.dtechatoms.cheffcipe.domain.FoodsByNameModel" />
+            app:argType="string" />
     </fragment>
 
     <fragment

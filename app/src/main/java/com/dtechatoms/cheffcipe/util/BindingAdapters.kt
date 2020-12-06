@@ -1,6 +1,10 @@
 package com.dtechatoms.cheffcipe.util
 
+import android.app.Application
+import android.content.Context
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -39,14 +43,21 @@ fun allCatListRecyclerView(
     adapter.submitList(foodsByCategoryModel)
 }
 
-
-/**
- * Binding adapter used to display images from URL using Glide
- */
+ // Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun setImageUrl(imageView: ImageView, url: String) {
     Glide.with(imageView.context).load(url).apply(
         RequestOptions()
             .placeholder(R.drawable.loading_animation)
     ).into(imageView)
+}
+
+// Binding adapter to set TextViews
+@BindingAdapter("setTexts")
+fun setTextViews(textView: TextView, string: String){
+    textView.text = string
+}
+
+fun toasts(context:Context?,string: String){
+    Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
 }
